@@ -1,7 +1,19 @@
 # Gravity Books — Data Warehouse & OLAP Project
 
-A full end-to-end **Data Warehousing** project built on the **Gravity Books** OLTP database, covering source analysis, dimensional modeling, ETL pipelines, and an SSAS multidimensional cube.
+## Project Overview
+A full end-to-end **Data Warehousing** project built on the **Gravity Books** OLTP database, covering source analysis, dimensional modeling, ETL pipelines, and an SSAS multidimensional cube.The project involves the use of Extract, Transform, Load (ETL) processes to migrate and transform data, and the implementation of SQL Server Analysis Services (SSAS) to create a cube for in-depth data analysis.
 
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Source OLTP | SQL Server |
+| Data Warehouse | SQL Server (Snowflake Schema) |
+| ETL | SQL Server Integration Services (SSIS) |
+| OLAP | SQL Server Analysis Services (SSAS) — Multidimensional |
+| Development IDE | Visual Studio (with SSDT) |
 
 ---
 
@@ -9,7 +21,7 @@ A full end-to-end **Data Warehousing** project built on the **Gravity Books** OL
 
 ```
 ┌─────────────────────┐     ┌──────────────────────┐     ┌──────────────────────┐
-│   Source OLTP DB    │────▶│     SSIS ETL Layer    │────▶│  DWH (Snowflake Schema)   │
+│   Source OLTP DB    │────▶│     SSIS ETL Layer    │────▶│DWH (Snowflake Schema)│
 │  (Gravity Books)    │     │  Gravity_Books_ETL    │     │   SQL Server DWH     │
 └─────────────────────┘     └──────────────────────┘     └──────────┬───────────┘
                                                                      │
@@ -34,13 +46,14 @@ The source is a normalized **bookstore transactional database** with the followi
 
 **Source ERD:**
 
-![Source ERD](10.png)
+<img width="1362" height="731" alt="10" src="https://github.com/user-attachments/assets/b68217b6-e740-4648-bc2e-0503e0e8b2a3" />
+
 
 ---
 
-## Dimensional Model — Star Schema
+## Dimensional Model — Snowflake Schema
 
-The DWH follows a **Star Schema** design with **SCD Type 2** tracking on slowly changing dimensions.
+The DWH follows a **Snowflake Schema** design with **SCD Type 2** tracking on slowly changing dimensions.
 
 ### Fact Table
 
@@ -63,9 +76,10 @@ The DWH follows a **Star Schema** design with **SCD Type 2** tracking on slowly 
 | `DimDate` | DateSK, Date, Day, DayOfWeek, Week, Month, Quarter, Year | — | Full calendar attributes |
 | `DimTime` | TimeSK, Time, Hour, Minute, Second, AmPm | — | Time-of-day grain |
 
-**Star Schema Diagram:**
+**Snowflake Schema Diagram:**
 
-![Star Schema](6.png)
+<img width="1468" height="862" alt="6" src="https://github.com/user-attachments/assets/5de7aa27-3cf9-4a90-8c12-f121362c9d9d" />
+
 
 ---
 
@@ -77,7 +91,7 @@ All ETL packages are built with **SQL Server Integration Services (SSIS)** and i
 
 | # | Package | Target Dimension | Size |
 |---|---|---|---|
-| 01 | `01_Dim_Customer.dtsx` | `Dim_Customer` | 90 KB |
+| 01 | `01_Dim_Customer.dtsx` | `Dim_Customer` |
 | 02 | `02_Dim_book.dtsx` | `Dim_Book` | 47 KB |
 | 03 | `03_Dim_Customer_Address.dtsx` | `Dim_Customer_Address` | 31 KB |
 | 04 | `04_Dim_Address.dtsx` | `Dim_Address` | 101 KB |
@@ -138,19 +152,8 @@ A **multidimensional SSAS cube** built on top of the star schema.
 
 **SSAS Cube Design:**
 
-![SSAS Cube](1.png)
+<img width="1918" height="1013" alt="1" src="https://github.com/user-attachments/assets/e5e96a4d-39cd-460a-af79-34170aaa8cbe" />
 
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Source OLTP | SQL Server |
-| Data Warehouse | SQL Server (Star Schema) |
-| ETL | SQL Server Integration Services (SSIS) |
-| OLAP | SQL Server Analysis Services (SSAS) — Multidimensional |
-| Development IDE | Visual Studio (with SSDT) |
 
 ---
 
