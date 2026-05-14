@@ -1,26 +1,15 @@
-# 📚 Gravity Books — Data Warehouse & OLAP Project
+# Gravity Books — Data Warehouse & OLAP Project
 
 A full end-to-end **Data Warehousing** project built on the **Gravity Books** OLTP database, covering source analysis, dimensional modeling, ETL pipelines, and an SSAS multidimensional cube.
 
----
-
-## 🗂️ Project Structure
-
-```
-📁 New folder/
-├── 📁 Gravity_Books_ETL/         # SSIS ETL project (dimension & fact packages)
-├── 📁 DWH_Gravity_SSAS/          # SSAS multidimensional cube project
-├── 🖼️ 1–10.png                   # Project documentation screenshots
-└── 🗄️ Gravity_DWH               # SQL Server Data Warehouse database backup
-```
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```
 ┌─────────────────────┐     ┌──────────────────────┐     ┌──────────────────────┐
-│   Source OLTP DB    │────▶│     SSIS ETL Layer    │────▶│  DWH (Star Schema)   │
+│   Source OLTP DB    │────▶│     SSIS ETL Layer    │────▶│  DWH (Snowflake Schema)   │
 │  (Gravity Books)    │     │  Gravity_Books_ETL    │     │   SQL Server DWH     │
 └─────────────────────┘     └──────────────────────┘     └──────────┬───────────┘
                                                                      │
@@ -33,7 +22,7 @@ A full end-to-end **Data Warehousing** project built on the **Gravity Books** OL
 
 ---
 
-## 1️⃣ Source System — Gravity Books OLTP
+## Source System — Gravity Books OLTP
 
 The source is a normalized **bookstore transactional database** with the following entities:
 
@@ -49,7 +38,7 @@ The source is a normalized **bookstore transactional database** with the followi
 
 ---
 
-## 2️⃣ Dimensional Model — Star Schema
+## Dimensional Model — Star Schema
 
 The DWH follows a **Star Schema** design with **SCD Type 2** tracking on slowly changing dimensions.
 
@@ -80,7 +69,7 @@ The DWH follows a **Star Schema** design with **SCD Type 2** tracking on slowly 
 
 ---
 
-## 3️⃣ ETL Layer — SSIS (`Gravity_Books_ETL`)
+## ETL Layer — SSIS (`Gravity_Books_ETL`)
 
 All ETL packages are built with **SQL Server Integration Services (SSIS)** and implement **SCD Type 2** logic where applicable.
 
@@ -118,7 +107,7 @@ All ETL packages are built with **SQL Server Integration Services (SSIS)** and i
 
 ---
 
-## 4️⃣ OLAP Layer — SSAS Cube (`DWH_Gravity_SSAS`)
+## OLAP Layer — SSAS Cube (`DWH_Gravity_SSAS`)
 
 A **multidimensional SSAS cube** built on top of the star schema.
 
@@ -153,7 +142,7 @@ A **multidimensional SSAS cube** built on top of the star schema.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -165,7 +154,7 @@ A **multidimensional SSAS cube** built on top of the star schema.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
