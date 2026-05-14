@@ -123,7 +123,7 @@ All ETL packages are built with **SQL Server Integration Services (SSIS)** and i
 
 ## OLAP Layer — SSAS Cube (`DWH_Gravity_SSAS`)
 
-A **multidimensional SSAS cube** built on top of the star schema.
+A **multidimensional SSAS cube** built on top of the Snowflake schema.
 
 **Cube:** `DWH Gravity Books`
 
@@ -155,50 +155,3 @@ A **multidimensional SSAS cube** built on top of the star schema.
 <img width="1918" height="1013" alt="1" src="https://github.com/user-attachments/assets/e5e96a4d-39cd-460a-af79-34170aaa8cbe" />
 
 
----
-
-## Getting Started
-
-### Prerequisites
-
-- SQL Server 2019+
-- SQL Server Integration Services (SSIS)
-- SQL Server Analysis Services (SSAS)
-- Visual Studio with SQL Server Data Tools (SSDT)
-
-### Setup Steps
-
-1. **Restore the source database**
-   - Restore `Gravity_DWH` backup file to your SQL Server instance.
-
-2. **Create the DWH database**
-   - Execute the star schema DDL scripts to create all dimension and fact tables.
-
-3. **Configure ETL connections**
-   - Open `Gravity_Books_ETL` in Visual Studio.
-   - Update `LocalHost.gravity_books.conmgr` to point to your OLTP source.
-   - Update `LocalHost.DWH_Gravity_Books.conmgr` to point to your DWH database.
-
-4. **Run SSIS packages** in order (01 → 08 → Fact_Sales)
-
-5. **Deploy the SSAS cube**
-   - Open `DWH_Gravity_SSAS` in Visual Studio.
-   - Update the `Sales_Data_Source` connection string.
-   - Deploy and process the cube.
-
----
-
-## 📸 Screenshots
-
-| # | Description |
-|---|---|
-| `1.png` | SSAS Cube Design (Visual Studio) |
-| `6.png` | Star Schema Diagram (SQL Server) |
-| `10.png` | Source OLTP ERD (Gravity Books) |
-
----
-
-## 👤 Author
-
-**Hazem Osama**
-Data Engineering Track — Information Technology Institute (ITI)
